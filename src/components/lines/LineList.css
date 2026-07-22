@@ -1,0 +1,28 @@
+.linelist-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 25px 25px;
+}
+
+.line-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+  border: 1px solid #000;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.line-card p {
+  padding-left: 25px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.lavel {
+  width: 80px;
+  height: 100%;
+  background-color: var(--line-color, #fff);
+}

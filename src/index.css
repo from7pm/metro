@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
+
+html {
+  overflow-y: scroll; /* 스크롤바가 항상 차지하도록 */
+}
+
+body {
+  background-color: #F5F5F5;
+}
+
+#root {
+  margin: 0 auto;
+  max-width: 1200px;
+}

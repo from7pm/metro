@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+
+.linesdetail-web-container {
+  width: 100%;
+  margin-inline: auto;
+  padding: 0; 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 360px;
+  container-type: inline-size; /* cqw 활성화 */
+  --line-color: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.linesdetail-box {
+   width: min(1200px, max(360px, 100%));
+  padding-top: 10px;
+  display: grid;
+  place-items: center;
+  grid-template-rows: auto auto 1fr auto;
+  container-type: inline-size;
+}
+
+.linesdetail-textbox {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: normal;
+  display: grid;
+  place-items: center;
+}
+
+.linesdetail-frame {
+  /* 너비: 310~1146px → 약 17~63vw로 변환 */
+  inline-size: min(1200px, calc(100% - 50px));
+
+  /* 높이: 800~1143px → 약 44~63vh로 변환 (cqh 포함) */
+  block-size: min(67.1vh, max(56.9vh,
+                calc(56.9vh + ((100cqw - 31.9vh) * 0.138059701)))) ;
+
+  margin-top: 35px;
+  margin-bottom: 0;
+  padding: 30px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #000;  
+}
+
+.stations-responsive-height {
+  inline-size: 100%; 
+  block-size: min(1083px, max(640px, 42cqw));
+  position: relative;
+  overflow-y: hidden;  
+}
+
+.linesdetail-stations-height {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  /* iOS 부드러운 스크롤 */
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+  z-index: auto;
+}
+
+.linesdetail-stations {
+  min-height: 542px;
+  max-height: 582px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-color: var(--line-color);
+}
+
+.stations-lines {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
+
+.linesdetail-station {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  width: 114px; 
+  height: 36px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+    line-height: normal;
+    border: 3px solid var(--line-color);
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.linesdetail-branchLine {
+  width: 136px;
+  height: 36px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border-radius: 0;
+  border: 4px solid #fff;
+  background-color: #35A344;
+  color: #fff;
+  box-shadow: 0 2px 7px #333;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.line-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-line-color,
+.bottom-line-color {
+   position: relative;  
+  display: grid;
+  place-items: center;
+  width: 5px;
+  height: 21px;
+  background-color: var(--line-color);
+}
+
+.linesdetail-loopLine {
+  width: 136px;
+  height: 36px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border-radius: 0;
+  border: 4px solid #fff;
+  background-color: #35A344;
+  color: #fff;
+  box-shadow: 0 2px 7px #333;
+  pointer-events: none;
+}
+
+.top-line-color.first { opacity: 0; }
+.bottom-line-color.last { opacity: 0; }
+
+.grid-spacer {
+width: 100%; 
+height: 25px; 
+} 
+
+.linesdetail-hide-scrollbar { scrollbar-width: none; }
+.linesdetail-hide-scrollbar::-webkit-scrollbar { display: none; }
+
+
+  /* ② 내부 레일 컨테이너도 절대배치로 오버레이 영역을 그대로 쓰게 */
+.linesdetail-subways {
+  width: min(1200px, 100%);
+  block-size: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+  .linesdetail-subway-line-up {
+    width: 100px;                 /* 선 두께 */
+    block-size: 100%;      /* 리스트 실제 높이와 동일 */
+    position: relative;    /* 아이콘 absolute 기준 */
+    display: grid;
+    place-items: center;
+  }
+
+  .linesdetail-subway-line-down {
+    width: 100px;                 /* 선 두께 */
+    block-size: 100%;      /* 리스트 실제 높이와 동일 */
+    position: relative;    /* 아이콘 absolute 기준 */
+    display: grid;
+    place-items: center;  
+  }
+
+  
+  .linesdetail-subway-up-image {
+    position:absolute;
+    width: 25px;
+    height: 25px;
+    pointer-events: auto;
+  }
+
+  .linesdetail-subway-down-image {
+    position:absolute;
+    width: 25px;
+    height: 25px; 
+    pointer-events: auto;
+  }
+
+
+  .linesdetail-tooltip {
+    width: 25px;  
+    height: 25px;
+  }
+
+  .linesdetail-tooltip::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(-100% - 10px);  /* 아이콘 위로 10px */
+    transform: translateX(-50%);
+    background: rgba(20, 20, 20, 0.92);
+    color: #fff;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 6px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 140ms ease;
+    z-index: 9999;
+  }
+
+  .linesdetail-tooltip::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(20, 20, 20, 0.92); /* 위쪽 삼각형(툴팁 꼬리) */
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 9999;
+  }
+
+  .linesdetail-tooltip:hover::after,
+  .linesdetail-tooltip:hover::before {
+    opacity: 1;
+  }
+
+
+  .linesdetail-subwaysbox.masked {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;   mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+

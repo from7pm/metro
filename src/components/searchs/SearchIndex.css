@@ -1,0 +1,340 @@
+/* 검색창 */
+.search-container {
+  padding: 0 25px 25px;
+}
+
+.search-box {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.departure-station, .arrival-station {
+  width: 100%;
+  height: 45px;
+  padding: 0 30px;
+  display: block;
+  background-color: #fff;
+  border: 1px solid #000;
+    outline: none;
+}
+
+.arrival-station {
+  border-top: none;
+}
+
+
+/* 드랍다운 */
+.search-departure-station, .search-arrival-station {
+  position: relative; /* 드롭다운 기준 */
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;  /* input 바로 아래 */
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: none;
+  background-color: #fff;
+  max-height: 200px; /* 항목 많을 때 스크롤 가능 */
+  overflow-y: auto; /* 스크롤이 필요할 경우에만 스크롤 생성 */
+  z-index: 2;
+  list-style: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.search-dropdown li {
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.search-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-station-frcord {
+  margin-left: 5px;
+  color: #585858;
+  font-size: 10px;
+}
+
+.dropdown-station-line {
+  color: #585858;
+  font-size: 12px;
+}
+
+/* 위아래 교체, 리셋, 길찾기버튼 */
+.reverse-btn {
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  position: absolute;
+  top: 27px;
+  right: 27px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.search-btns {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-btns button {
+  width: 140px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.search-btn {
+  color: #1F007C;
+}
+
+/* 검색 옵션 */
+.search-option-container {
+  margin-bottom: 20px;
+  position: relative; 
+}
+
+.search-kind {
+  width: 120px;
+  height: 30px;
+  padding: 8px 10px;
+  border: 1px solid #000;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dropdown-option-arrow {
+  font-size: 12px;
+  transform-origin: center center;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-option-arrow.open {
+  transform: rotate(180deg);
+}
+
+.option-list {
+  padding: 0;
+  margin: 0;
+  border: 1px solid #000;
+  border-top: none; 
+  top: 100%; 
+  left: 0;
+  width: 120px;
+  background-color: #fff;
+  list-style: none;
+  z-index: 4;
+  position: absolute; 
+}
+
+.option-dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.option-dropdown-item:hover {
+  background-color: #f0f0f0; 
+}
+
+/* 카드 */
+.search-card-container {
+  width: 100%;
+}
+
+.card {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+
+.card-running-time {
+  display: inline;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.card-content-group {
+  display: inline;
+  font-size: 11px;
+  font-weight: bold;
+  color: #1F007C;
+}
+
+.card-process {
+  font-size: 10px;
+  font-weight: bold;
+  color: #585858;
+}
+
+/* 환승노선도 */
+.card-route-container {
+  margin-top: 10px;
+}
+
+.route-group {
+  display: flex;
+  gap: 25px;
+}
+
+.estimated-time {
+  font-size: 10px;
+  font-weight: bold;
+  color: #898989;
+  position: relative;
+  top: 2px;
+}
+
+.route-map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-circle {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 4px solid var(--line-color);
+}
+
+.search-line {
+  width: 0;
+  height: 25px;
+  border: 2px solid var(--line-color);
+}
+
+
+.apply-station {
+  height: 23px;
+  display: flex;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.search-line-number {
+  width: 23px;
+  height: 23px;
+  background-color: var(--line-color);
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 22px;
+  font-size: 18px;
+}
+
+.line-name-two-letter {
+  font-size: 10px;
+}
+
+.line-name-three-letter {
+  font-size: 7px;
+}
+
+.station-name {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.route-group:last-child .route-map .search-line {
+  display: none;
+}
+
+/* 호선 별 고유 색상 */
+.line-1 {
+  --line-color: #163191;
+}
+.line-2 {
+  --line-color: #35A344;
+}
+.line-3 {
+  --line-color: #E88200;
+}
+.line-4 {
+  --line-color: #39A6E1;
+}
+.line-5 {
+  --line-color: #9C4A9D;
+}
+.line-6 {
+  --line-color: #AD7A00;
+}
+.line-7 {
+  --line-color: #637531;
+}
+.line-8 {
+  --line-color: #DF4C71;
+}
+.line-9 {
+  --line-color: #BA9300;
+}
+.line-in1 {
+  --line-color: #6c97e1;
+}
+.line-in2 {
+  --line-color: #f59801;
+}
+.line-bun {
+  --line-color: #f7d100;
+}
+.line-sinbun {
+  --line-color: #c41e30;
+}
+.line-kyung {
+  --line-color: #81c09f;
+}
+.line-kong {
+  --line-color: #2f8fa1;
+}
+.line-chun {
+  --line-color: #51c7a7;
+}
+.line-yongin {
+  --line-color: #61ab26;
+}
+.line-kyeongkang {
+  --line-color: #1b4faa;
+}
+.line-seo {
+  --line-color: #9de818;
+}
+.line-kimpo {
+  --line-color: #d8c579;
+}
+.line-sinlim {
+  --line-color: #4a9aff;
+}
+.line-ujb {
+  --line-color: #f0b900;
+}
+.line-wooi {
+  --line-color: #b7b7b7;
+}

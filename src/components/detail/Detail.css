@@ -1,0 +1,263 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.detail-container {
+  padding: 10px 25px 25px 25px;
+  display: grid;
+  gap: 20px;
+  --line-color: #000000;
+}
+
+/* ---------- 이전역/현재역/다음역 ---------- */
+
+.next-station-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 5px 0;
+}
+
+/* 이전/다음역 공통 스타일 */
+.prev-station,
+.next-station {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  border: 1px solid var(--line-color);
+  background-color: var(--line-color);
+  color: #fff;
+  height: 40px;
+  border-radius: 50px;
+  min-width: 0;
+}
+
+/* 현재역이 중앙을 가리기 때문에, 겹치는 부분만큼 여백 확보 */
+.prev-station {
+  text-align: left;
+  padding-right: calc(50%); /* 중앙 now-station 반지름 + 여유 */
+}
+
+.next-station {
+  text-align: right;
+  padding-left: calc(50%); /* 중앙 now-station 반지름 + 여유 */
+}
+
+/* 역명이 너무 길면 ... 처리 */
+.prev-station-name,
+.next-station-name {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.prev-station-arrow, .next-station-arrow {
+  flex-shrink: 0;
+}
+
+/* 비활성화된 상태 */
+.prev-station.disabled,
+.next-station.disabled {
+  pointer-events: none;
+}
+
+/* 현재역 표시 (가운데 떠 있음) */
+.now-station {
+  padding: 0 10px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  gap: 4px;
+
+  border: 3px solid var(--line-color);
+  background-color: #fff;
+  color: #000;
+  height: 50px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 2px;
+  width: 30%;
+  min-width: 150px;
+  max-width: 250px; /* 필요 시 제한 */
+  z-index: 2; /* 위로 띄움 */
+}
+
+/* 현재역명 : 5글자 초과시 설정 (6,7) */
+.now-station-name.long {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 20px;
+}
+/* 현재역명 : 7글자 초과시 설정 (8,9) */
+.now-station-name.longer {
+  padding: 3px 0;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+/* 노선 심볼 */
+.line-num {
+  color: var(--line-color);
+  font-size: 23px;
+}
+
+/* ---------- 도착 정보 ---------- */
+
+.arrival-title {
+  height: 50px;
+  border: 1px solid #000;
+  background-color:#fff;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 46px;
+
+  position: relative;
+}
+
+.refresh-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  
+  cursor: pointer;
+}
+
+.refresh-btn:active {  
+  width: 25px;
+  height: 25px;
+}
+
+.arrival-container {
+  border: 1px solid #000;
+  border-top: none;
+  padding: 20px;
+  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+}
+
+.arrival-direction {
+  height: 40px;
+  border: 1px solid #000;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+  background-color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 38px;
+}
+
+/* 방면명 : 17글자 초과시 설정 (18~) */
+.arrival-direction.long {
+  font-size: 16px;
+}
+
+.arrival-info {
+  padding: 5px;
+  height: 100px;
+  border: 1px solid #000;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+}
+
+.arrival-info-1, .arrival-info-2 {
+  padding: 10px;
+  height: 45px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ---------- 편의시설 ---------- */
+
+.convenience-title {
+  height: 50px;
+  border: 1px solid #000;
+  background-color:#fff;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 46px;
+}
+
+.convenience-container {
+  border: 1px solid #000;
+  border-top: none;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  justify-content: center;
+  gap: 20px;
+}
+
+.convenience-info {
+  display: flex;
+  gap: 10px;
+}
+
+.convenience-info img {
+  width: 25px;
+  height: 25px;
+}
+
+.convenience-info p {
+  display: inline-block;
+}
+
+/* ---------- 역 정보 ---------- */
+
+.station-info-title {
+  height: 50px;
+  border: 1px solid #000;
+  background-color:#fff;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 46px;
+}
+
+.color-gray {
+  color: rgba(126, 126, 126, 1);
+  width: 63px;
+}
+
+.station-info-container {
+  border: 1px solid #000;
+  border-top: none;
+  padding: 20px;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
+.station-info-addr, .station-info-tel {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: start;
+  gap: 20px;
+}

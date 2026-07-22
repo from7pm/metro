@@ -1,0 +1,161 @@
+.evacuation-container {
+  padding: 0 25px 25px;
+}
+
+/* 검색창 */
+.evacuation-search-box {
+  width: 100%;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.line-search, .station-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.line-search label, .station-search label {
+  width: 63px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.line-dropdown-container, .station-dropdown-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+}
+
+.evacuation-input {
+  flex: 1;
+  height: 38px;
+  padding: 0 10px;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+/* 호선선택 드랍다운에 화살표 아이콘 넣기 */
+.dropdown-btn {
+  position: absolute;
+  top: 50%;
+  right: 11px;
+  width: 15px;
+  height: 10px;
+  background-image: url('/public/btn/dropbox-btn.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.2s;
+  transform-origin: center center; /* 중앙 회전 */
+  cursor: pointer;
+}
+
+/* 드랍다운이 열리면 화살표 회전 */
+.dropdown-btn.evacuation-line-search-open {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.station-search input {
+  cursor: text;
+}
+
+.station-search-btn {
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background-color: #fff;
+  background-image: url('/btn/search-btn.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* 툴팁 */
+.tooltip {
+  position: absolute;
+  top: 37px;
+  left: 0;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 4px 8px;
+  margin-top: 4px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+
+/* 드랍다운 */
+.evacuation-dropdown {
+  position: absolute;
+  top: 37px;
+  left: 0px;
+  right: 0px;
+  border: 1px solid #ccc;
+  border-top: 1px solid #000;
+  background-color: #fff;
+  max-height: 200px; /* 항목 많을 때 스크롤 가능 */
+  overflow-y: auto; /* 스크롤이 필요할 경우에만 스크롤 생성 */
+  z-index: 1;
+  list-style: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.evacuation-dropdown li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.evacuation-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* 대피도 이미지 */
+.img-card {
+  position: relative;
+  max-width: 1150px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.img-card-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 9 / 8;
+}
+
+.evacuation-img-placeholder {
+  margin: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.evacuation-img {
+  max-width: 1150px;
+  width: 100%;
+  user-select: none;
+  touch-action: none;
+}
+
+.expansion-icon {
+  width: 15px;
+  position: absolute;
+  top: 15px;
+  right: 15px
+}
