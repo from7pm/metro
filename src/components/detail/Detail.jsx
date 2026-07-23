@@ -94,6 +94,17 @@ function Detail() {
   // 현재역의 도착 정보(역명(statnNm)과 호선이 동일한 것만 가져오기)
   const currentArrivalList = Array.isArray(arrivalInfo) ? arrivalInfo.filter((info) => {
 
+    console.log("currentArrivalList", currentArrivalList);
+
+    console.table(
+      currentArrivalList.map(v => ({
+        statnNm: v.statnNm,
+        trainLineNm: v.trainLineNm,
+        bstatnNm: v.bstatnNm,
+        subwayId: v.subwayId,
+      }))
+    );
+
     // 역명이 같으면
     if (info.statnNm === station) {
       const sameStation = info.statnNm === station; // 현재역명
@@ -114,19 +125,9 @@ function Detail() {
       }
       return false; // station과 statnNm이 다르면 아무것도 반환하지 않음
     }
-
-    console.log("currentArrivalList", currentArrivalList);
-
-    console.table(
-      currentArrivalList.map(v => ({
-        statnNm: v.statnNm,
-        trainLineNm: v.trainLineNm,
-        bstatnNm: v.bstatnNm,
-        subwayId: v.subwayId,
-      }))
-    );
-
   }) : [];
+
+  console.log("currentArrivalList", currentArrivalList);
 
   // trainLineNm에서 '행' 앞부분 제거하고, '~방면'만 추출
   const extractDirection = (trainLineNm) => {
@@ -139,14 +140,13 @@ function Detail() {
 
   // 방면별로 그룹화
   const groupedByDirection = currentArrivalList.reduce((acc, cur) => {
-
-    console.log("groupedByDirection", groupedByDirection);
-
     const direction = extractDirection(cur.trainLineNm);
     if (!acc[direction]) acc[direction] = [];
     acc[direction].push(cur);
     return acc;
   }, {});
+
+  console.log("groupedByDirection", groupedByDirection);
 
   // 각 방면에서 barvlDt 오름차순으로 정렬 후 2개까지만 남기기
   Object.keys(groupedByDirection).forEach(direction => {
