@@ -1,6 +1,6 @@
 const DATASETS = {
   arrival: {
-    baseUrl: "https://swopenapi.seoul.go.kr/api/subway",
+    baseUrl: "http://swopenapi.seoul.go.kr/api/subway",
     service: "realtimeStationArrival",
   },
   evacuation: {
