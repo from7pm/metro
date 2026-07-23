@@ -6,12 +6,11 @@ export const GAP = 42;
 export const STEP = STATION_H + GAP; // 78
 
 /* ───────── 이름 정규화 + 별칭 */
-export const normalizeName = (name = "") =>
+export const normalizeStationName = (name = "") =>
   String(name)
     .normalize("NFC")
     .replace(/역$/, "")
     .replace(/\(.*?\)/g, "")
-    .replace(/[·.\-]/g, "")
     .replace(/\s+/g, "")
     .trim();
 
@@ -36,7 +35,7 @@ export const parseLineLabel = (lineId) => {
 };
 
 export const keyBase = (t) => {
-  const no  = t.btrainNo || t.trainNo || t.btrain || t.trainId || "no";
+  const no = t.btrainNo || t.trainNo || t.btrain || t.trainId || "no";
   const dir = t.updnLine || t.direction || t.dir || "dir";
   const sid = t.statnId || t.statnFid || t.statnTid || "sid";
   return `${no}-${dir}-${sid}`;
