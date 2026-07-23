@@ -113,29 +113,29 @@ function Detail() {
     setTimeout(() => setRefreshing(false), 800);
   };
 
-  // 현재역의 도착 정보(역명(statnNm)과 호선이 동일한 것만 가져오기)
-  const currentArrivalList = Array.isArray(arrivalInfo) ? arrivalInfo.filter((info) => {
-    // 역명이 같으면
-    if (info.statnNm === station) {
-      const sameStation = info.statnNm === station; // 현재역명
-      const subwayIdNum = Number(info.subwayId); // 문자열 숫자로 변환
-      const validSubwayId = subwayIdNum >= 1001 && subwayIdNum <= 1009; // 1001~1009만 가져옴
-      const sameLine = subwayIdNum % 100 === Number(lineNumOnly);
+  //  현재역의 도착 정보(역명(statnNm)과 호선이 동일한 것만 가져오기)
+  // const currentArrivalList = Array.isArray(arrivalInfo) ? arrivalInfo.filter((info) => {
+  //    역명이 같으면
+  //   if (info.statnNm === station) {
+  //     const sameStation = info.statnNm === station;  현재역명
+  //     const subwayIdNum = Number(info.subwayId);  문자열 숫자로 변환
+  //     const validSubwayId = subwayIdNum >= 1001 && subwayIdNum <= 1009;  1001~1009만 가져옴
+  //     const sameLine = subwayIdNum % 100 === Number(lineNumOnly);
 
-      return sameStation && validSubwayId && sameLine; // 동일한 호선 및 유효한 subwayId일 때만 반환
-    } else {
-      // 역명이 다르면 stationNameMapping을 기준으로 비교
-      const mappedStation = stationNameMapping[lineId]?.[station]; // stationNameMapping에서 역명 비교
-      if (mappedStation && mappedStation === info.statnNm) {
-        const subwayIdNum = Number(info.subwayId); // 문자열 숫자로 변환
-        const validSubwayId = subwayIdNum >= 1001 && subwayIdNum <= 1009; // 1001~1009만 가져옴
-        const sameLine = subwayIdNum % 100 === Number(lineNumOnly);
+  //     return sameStation && validSubwayId && sameLine;  동일한 호선 및 유효한 subwayId일 때만 반환
+  //   } else {
+  //      역명이 다르면 stationNameMapping을 기준으로 비교
+  //     const mappedStation = stationNameMapping[lineId]?.[station];  stationNameMapping에서 역명 비교
+  //     if (mappedStation && mappedStation === info.statnNm) {
+  //       const subwayIdNum = Number(info.subwayId);  문자열 숫자로 변환
+  //       const validSubwayId = subwayIdNum >= 1001 && subwayIdNum <= 1009;  1001~1009만 가져옴
+  //       const sameLine = subwayIdNum % 100 === Number(lineNumOnly);
 
-        return validSubwayId && sameLine; // 동일한 호선 및 유효한 subwayId일 때만 반환
-      }
-      return false; // station과 statnNm이 다르면 아무것도 반환하지 않음
-    }
-  }) : [];
+  //       return validSubwayId && sameLine;  동일한 호선 및 유효한 subwayId일 때만 반환
+  //     }
+  //     return false;  station과 statnNm이 다르면 아무것도 반환하지 않음
+  //   }
+  // }) : [];
 
   // trainLineNm에서 '행' 앞부분 제거하고, '~방면'만 추출
   const extractDirection = (trainLineNm) => {
