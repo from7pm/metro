@@ -8,6 +8,8 @@ const normalizeStationName = (name = "") =>
   String(name)
     .normalize("NFC")
     .replace(/역$/, "")
+    .replace(/\(.*?\)/g, "")
+    .replace(/[·.\-]/g, "")
     .replace(/\s+/g, "")
     .trim();
 
