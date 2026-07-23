@@ -10,13 +10,13 @@ function Detail() {
   const navigate = useNavigate();
   const { lineId, station } = useParams();
 
-  const [refreshing, setRefreshing] = useState(false);
+  const [ refreshing, setRefreshing ] = useState(false);
 
   const lines = useSelector((state) => state.detail.lines);
   const stationInfo = useSelector((state) => state.detail.stationInfo);
   const convenienceInfo = useSelector((state) => state.detail.convenienceInfo);
   const arrivalInfo = useSelector((state) => state.detail.arrivalInfo);
-
+  
   // lineId의 숫자만 가져와서 비교
   const lineNumOnly = lineId.replace('line', '');
   const matchesLineField = (fieldValue) => {
@@ -28,13 +28,13 @@ function Detail() {
   // 윤희님 작업 : 호선별 색상 변경
   const lineNum = lineId.replace('line', '') + '호선';
   const lineColor = useMemo(
-    () => LINE_COLORS[lineNum] ?? "#000000",
-    [lineNum]
+  () => LINE_COLORS[lineNum] ?? "#000000",
+  [lineNum]
   );
 
 
 
-
+  
   // ---------- 도착 정보 ----------
 
   const stationNameMapping = {
@@ -85,7 +85,7 @@ function Detail() {
   }, []);
 
   // 새로고침 버튼 클릭 시 실행
-  const handleRefresh = async () => {
+  const handleRefresh = async() => {
     setRefreshing(true);
     await dispatch(arrivalInfoIndex()); // 최신 도착 정보 다시 불러오기
     setTimeout(() => setRefreshing(false), 800); // 로딩 표시 잠깐 유지
@@ -93,19 +93,7 @@ function Detail() {
 
   // 현재역의 도착 정보(역명(statnNm)과 호선이 동일한 것만 가져오기)
   const currentArrivalList = Array.isArray(arrivalInfo) ? arrivalInfo.filter((info) => {
-
-    console.log("currentArrivalList", currentArrivalList);
-
-    console.table(
-      currentArrivalList.map(v => ({
-        statnNm: v.statnNm,
-        trainLineNm: v.trainLineNm,
-        bstatnNm: v.bstatnNm,
-        subwayId: v.subwayId,
-      }))
-    );
-
-    // 역명이 같으면
+  // 역명이 같으면
     if (info.statnNm === station) {
       const sameStation = info.statnNm === station; // 현재역명
       const subwayIdNum = Number(info.subwayId); // 문자열 숫자로 변환
@@ -127,8 +115,6 @@ function Detail() {
     }
   }) : [];
 
-  console.log("currentArrivalList", currentArrivalList);
-
   // trainLineNm에서 '행' 앞부분 제거하고, '~방면'만 추출
   const extractDirection = (trainLineNm) => {
     if (!trainLineNm) return "";
@@ -145,8 +131,6 @@ function Detail() {
     acc[direction].push(cur);
     return acc;
   }, {});
-
-  console.log("groupedByDirection", groupedByDirection);
 
   // 각 방면에서 barvlDt 오름차순으로 정렬 후 2개까지만 남기기
   Object.keys(groupedByDirection).forEach(direction => {
@@ -179,7 +163,7 @@ function Detail() {
   const currentConvenienceInfo = Array.isArray(convenienceInfo)
     ? convenienceInfo.find(info =>
       info.STATION_NAME.includes(station) && (matchesLineField(info.LINE) || matchesLineField(info.LINE?.toString?.())))
-    || convenienceInfo.find(info => info.STATION_NAME === station)
+      || convenienceInfo.find(info => info.STATION_NAME === station)
     : null;
 
   const getConvenienceInfo = (key) => {
@@ -217,7 +201,7 @@ function Detail() {
 
 
   // ---------- 이전역/현재역/다음역 ----------
-
+  
   // 현재 line의 현재역(station)이 포함된 리스트 찾기
   const targetLineKey = `${lineId}List`; // ex)line1 -> line1List로 만들기
   let stationList = lines && lines[targetLineKey] ? lines[targetLineKey] : undefined;
@@ -247,15 +231,15 @@ function Detail() {
     line8List: "➑",
     line9List: "➒",
   }
-
+  
   const lineSymbol = lineSymbolMapbyId[targetLineKey] || ""; // 객체에서 특정 키에 해당하는 값을 꺼내는 문법
 
   // 현재역의 이전/다음으로 이동
   const MovePrevStation = () => {
-    if (prevStation) navigate(`/linesdetail/${lineId}/details/${prevStation}`);
+    if(prevStation) navigate(`/linesdetail/${lineId}/details/${prevStation}`);
   }
   const MoveNextStation = () => {
-    if (nextStation) navigate(`/linesdetail/${lineId}/details/${nextStation}`);
+    if(nextStation) navigate(`/linesdetail/${lineId}/details/${nextStation}`);
   }
 
 
@@ -268,12 +252,12 @@ function Detail() {
         <div className='next-station-container' >
           {/* <div className="prev-station left"><p>〈 종각</p></div> */}
           {/* <div className="next-station right"><p>서울역 〉</p></div> */}
-          <div className={`prev-station ${!prevStation ? "disabled" : ""}`} onClick={prevStation ? MovePrevStation : undefined} style={{ cursor: prevStation ? 'pointer' : 'default' }} >
+          <div className={`prev-station ${!prevStation ? "disabled" : ""}`} onClick={prevStation ? MovePrevStation : undefined} style={{cursor: prevStation ? 'pointer' : 'default'}} >
             {/* <p>〈 {prevStation || ""}</p> */}
             <span className='prev-station-arrow' >〈</span>
             <span className='prev-station-name' >{prevStation || ""}</span>
           </div>
-          <div className={`next-station ${!nextStation ? "disabled" : ""}`} onClick={nextStation ? MoveNextStation : undefined} style={{ cursor: nextStation ? 'pointer' : 'default' }} >
+          <div className={`next-station ${!nextStation ? "disabled" : ""}`} onClick={nextStation ? MoveNextStation : undefined} style={{cursor: nextStation ? 'pointer' : 'default'}} >
             <span className='next-station-name' >{nextStation || ""}</span>
             <span className='next-station-arrow' >〉</span>
           </div>
@@ -313,7 +297,7 @@ function Detail() {
             )}
           </div>
         </div>
-
+        
         {/* 편의시설 유무 */}
         <div>
           <div className="convenience-title">
@@ -322,15 +306,15 @@ function Detail() {
           <div className="convenience-container">
             <div className="convenience-info">
               <img src={getConvenienceInfo("EL").iconSrc} alt="엘리베이터" />
-              <p style={{ color: getConvenienceInfo("EL").textColor }}>엘리베이터</p>
+              <p style={{color: getConvenienceInfo("EL").textColor}}>엘리베이터</p>
             </div>
             <div className="convenience-info">
               <img src={getConvenienceInfo("FDROOM").iconSrc} alt="수유실" />
-              <p style={{ color: getConvenienceInfo("FDROOM").textColor }}>수유실</p>
+              <p style={{color: getConvenienceInfo("FDROOM").textColor}}>수유실</p>
             </div>
             <div className="convenience-info">
               <img src={getConvenienceInfo("PARKING").iconSrc} alt="환승주차장" />
-              <p style={{ color: getConvenienceInfo("PARKING").textColor }}>환승주차장</p>
+              <p style={{color: getConvenienceInfo("PARKING").textColor}}>환승주차장</p>
             </div>
             <div className="convenience-info">
               {/* 공공api에 자전거보관소(BICYCLE) 값이 모두 빈칸"" */}
@@ -341,7 +325,7 @@ function Detail() {
             </div>
             <div className="convenience-info">
               <img src={getConvenienceInfo("WL").iconSrc} alt="휠체어리프트" />
-              <p style={{ color: getConvenienceInfo("WL").textColor }}>휠체어리프트</p>
+              <p style={{color: getConvenienceInfo("WL").textColor}}>휠체어리프트</p>
             </div>
           </div>
         </div>
