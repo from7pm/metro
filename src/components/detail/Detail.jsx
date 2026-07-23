@@ -80,6 +80,9 @@ function Detail() {
     }
   };
 
+  const arrivalStationName =
+    stationNameMapping[lineId]?.[station] ?? station;
+
   useEffect(() => {
     dispatch(arrivalInfoIndex(arrivalStationName));
   }, [dispatch, arrivalStationName]);
