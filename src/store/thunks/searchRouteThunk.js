@@ -8,20 +8,19 @@ const getSearchRoute = createAsyncThunk(
       const state = thunkAPI.getState().search;
       console.log(state);
 
-      const formData = new FormData()
+      const formData = new URLSearchParams()
       formData.append('departureId', state.departureStationId) // 출발역 ID
       formData.append('arrivalId', state.arrivalStationId) // 도착역 ID
       formData.append('sKind', state.sKind) // 검색 종류 1 = 최소 시간 4 = 최단 거리 2= 최소 환승
 
-      const response = await axios.post('/api/kr/getRouteSearchResult.do',
+      const response = await axios.post('/api/route',
         formData,
         {
           responseType: 'text',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Accept': 'application/xml, text/xml, */*; q=0.01',
-            'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-            'X-Requested-With': 'XMLHttpRequest'
+            'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
           }
         }
       );

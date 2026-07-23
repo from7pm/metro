@@ -5,9 +5,13 @@ import axios from "axios";
 const arrivalInfoIndex = createAsyncThunk(
   'detailSlice/arrivalInfoIndex',
   async () => {
-    const url = `${axiosConfig.DETAIL_BASE_URL}/${axiosConfig.KEY}/${axiosConfig.TYPE}/${axiosConfig.ARRIVAL_INFO_SERVICE}/${axiosConfig.START_INDEX}/${axiosConfig.END_INDEX}`;
-
-    const response = await axios.get(url);
+    const response = await axios.get(axiosConfig.API_BASE_URL, {
+      params: {
+        dataset: 'arrival',
+        start: axiosConfig.START_INDEX,
+        end: axiosConfig.END_INDEX,
+      },
+    });
     return response.data;
   }
 );
@@ -15,9 +19,13 @@ const arrivalInfoIndex = createAsyncThunk(
 const convenienceInfoIndex = createAsyncThunk(
   'detailSlice/convenienceIndex',
   async () => {
-    const url = `${axiosConfig.SEARCH_EVACUATION_BASE_URL}/${axiosConfig.KEY}/${axiosConfig.TYPE}/${axiosConfig.CONVENIENCE_SERVICE}/${axiosConfig.START_INDEX}/${axiosConfig.END_INDEX}`;
-
-    const response = await axios.get(url);
+    const response = await axios.get(axiosConfig.API_BASE_URL, {
+      params: {
+        dataset: 'convenience',
+        start: axiosConfig.START_INDEX,
+        end: axiosConfig.END_INDEX,
+      },
+    });
     return response.data.TbSeoulmetroStConve.row;
   }
 );
@@ -25,9 +33,13 @@ const convenienceInfoIndex = createAsyncThunk(
 const stationInfoIndex = createAsyncThunk(
   'detailSlice/stationInfoIndex',
   async () => {
-    const url = `${axiosConfig.SEARCH_EVACUATION_BASE_URL}/${axiosConfig.KEY}/${axiosConfig.TYPE}/${axiosConfig.STATION_INFO_SERVICE}/${axiosConfig.START_INDEX}/${axiosConfig.END_INDEX}`;
-
-    const response = await axios.get(url);
+    const response = await axios.get(axiosConfig.API_BASE_URL, {
+      params: {
+        dataset: 'station',
+        start: axiosConfig.START_INDEX,
+        end: axiosConfig.END_INDEX,
+      },
+    });
     return response.data.StationAdresTelno.row;
   }
 );

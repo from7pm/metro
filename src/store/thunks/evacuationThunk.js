@@ -5,9 +5,13 @@ import axios from "axios";
 const evacuationIndex = createAsyncThunk(
   'evacuationSlice/evacuationIndex',
   async () => {
-    const url = `${axiosConfig.SEARCH_EVACUATION_BASE_URL}/${axiosConfig.KEY}/${axiosConfig.TYPE}/${axiosConfig.EVACUATION_SERVICE}/${axiosConfig.START_INDEX}/${axiosConfig.END_INDEX}`;
-
-    const response = await axios.get(url);
+    const response = await axios.get(axiosConfig.API_BASE_URL, {
+      params: {
+        dataset: 'evacuation',
+        start: axiosConfig.START_INDEX,
+        end: axiosConfig.END_INDEX,
+      },
+    });
 
     return response.data.SmrtEmergerncyGuideImg.row;
   }
