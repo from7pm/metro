@@ -85,6 +85,19 @@ function Detail() {
   const arrivalStationName =
     stationNameMapping[lineId]?.[station] ?? station;
 
+  const currentArrivalList = Array.isArray(arrivalInfo)
+    ? arrivalInfo.filter((info) => {
+      const sameStation =
+        normalizeName(info.statnNm) ===
+        normalizeName(arrivalStationName);
+
+      const sameLine =
+        Number(info.subwayId) === 1000 + Number(lineNumOnly);
+
+      return sameStation && sameLine;
+    })
+    : [];
+
   useEffect(() => {
     dispatch(arrivalInfoIndex(arrivalStationName));
   }, [dispatch, arrivalStationName]);
