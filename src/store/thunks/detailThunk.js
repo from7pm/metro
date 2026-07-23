@@ -3,15 +3,17 @@ import axiosConfig from "../../configs/apiConfigs/axiosConfig";
 import axios from "axios";
 
 const arrivalInfoIndex = createAsyncThunk(
-  'detailSlice/arrivalInfoIndex',
-  async () => {
+  "detailSlice/arrivalInfoIndex",
+  async (station) => {
     const response = await axios.get(axiosConfig.API_BASE_URL, {
       params: {
-        dataset: 'arrival',
-        start: axiosConfig.START_INDEX,
-        end: axiosConfig.END_INDEX,
+        dataset: "arrival",
+        station,
+        start: 1,
+        end: 20,
       },
     });
+
     return response.data;
   }
 );

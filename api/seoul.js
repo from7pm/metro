@@ -2,7 +2,6 @@ const DATASETS = {
   arrival: {
     baseUrl: "http://swopenapi.seoul.go.kr/api/subway",
     service: "realtimeStationArrival",
-    suffix: "ALL",
   },
   evacuation: {
     baseUrl: "http://openapi.seoul.go.kr:8088",
@@ -37,8 +36,22 @@ export default async function handler(request, response) {
 
   const dataset = String(request.query.dataset ?? "");
   const config = DATASETS[dataset];
+
   if (!config) {
-    return response.status(400).json({ message: "지원하지 않는 데이터 종류입니다." });
+    return response.status(400).json({
+      message: "지원하지 않는 데이터 종류입니다.",
+    });
+  }
+
+  const station =
+    dataset === "arrival"
+      ? String(request.query.station ?? "").trim()
+      : "";
+
+  if (dataset === "arrival" && !station) {
+    return response.status(400).json({
+      message: "도착정보 조회에는 역 이름이 필요합니다.",
+    });
   }
 
   const start = Number(request.query.start ?? 1);
@@ -54,7 +67,9 @@ export default async function handler(request, response) {
     config.service,
     start,
     end,
-    config.suffix,
+    dataset === "arrival"
+      ? encodeURIComponent(station)
+      : config.suffix,
   ]
     .filter(Boolean)
     .join("/");
@@ -67,10 +82,20 @@ export default async function handler(request, response) {
       "Content-Type",
       upstream.headers.get("content-type") ?? "application/json; charset=utf-8",
     );
-    response.setHeader("Cache-Control", "s-maxage=15, stale-while-revalidate=30");
+
+    response.setHeader(
+      "Cache-Control",
+      dataset === "arrival"
+        ? "no-store"
+        : "s-maxage=300, stale-while-revalidate=600",
+    );
+
     return response.status(upstream.status).send(body);
   } catch (error) {
     console.error("Seoul API request failed:", error);
-    return response.status(502).json({ message: "서울시 API 호출에 실패했습니다." });
+
+    return response.status(502).json({
+      message: "서울시 API 호출에 실패했습니다.",
+    });
   }
 }
