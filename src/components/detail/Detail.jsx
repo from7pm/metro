@@ -11,6 +11,7 @@ function Detail() {
   const { lineId, station } = useParams();
 
   const [refreshing, setRefreshing] = useState(false);
+  const [railStationInfo, setRailStationInfo] = useState(null);
 
   const lines = useSelector((state) => state.detail.lines);
   const stationInfo = useSelector((state) => state.detail.stationInfo);
@@ -200,6 +201,45 @@ function Detail() {
     )
     : null;
 
+  useEffect(() => {
+    if (lineId !== "line1") {
+      setRailStationInfo(null);
+      return;
+    }
+
+    let cancelled = false;
+
+    const loadRailStationInfo = async () => {
+      try {
+        const response = await fetch(
+          `/api/rail?station=${encodeURIComponent(station)}`,
+        );
+
+        if (!response.ok) {
+          throw new Error("코레일 역 정보 요청 실패");
+        }
+
+        const data = await response.json();
+
+        if (!cancelled) {
+          setRailStationInfo(data);
+        }
+      } catch (error) {
+        console.error(error);
+
+        if (!cancelled) {
+          setRailStationInfo(null);
+        }
+      }
+    };
+
+    loadRailStationInfo();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [lineId, station]);
+
 
 
   // ---------- 이전역/현재역/다음역 ----------
@@ -341,12 +381,20 @@ function Detail() {
             <div className="station-info-addr">
               <p className='color-gray' >주소</p>
               {/* <p>서울특별시 중구 세종대로 지하2(남대문로 5가)</p> */}
-              <p>{currentStationInfo?.ROAD_NM_ADDR || "정보 없음"}</p>
+              <p>
+                {currentStationInfo?.ROAD_NM_ADDR ||
+                  railStationInfo?.address ||
+                  "정보 없음"}
+              </p>
             </div>
             <div className="station-info-tel">
               <p className='color-gray' >전화번호</p>
               {/* <p>02-6110-1331</p> */}
-              <p>{currentStationInfo?.TELNO || "정보 없음"}</p>
+              <p>
+                {currentStationInfo?.TELNO ||
+                  railStationInfo?.phone ||
+                  "정보 없음"}
+              </p>
             </div>
           </div>
         </div>
