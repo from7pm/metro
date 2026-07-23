@@ -151,11 +151,34 @@ function Detail() {
   // barvlDt의 초 단위를 '분'으로 변환
   const formatSecondsToMinutes = (sec) => {
     const num = Number(sec);
+
     if (isNaN(num) || num < 0) return "-";
     if (num < 60) return "곧 도착";
+
     return `${Math.floor(num / 60)}분`;
   };
 
+  const formatArrivalMessage = (train) => {
+    const seconds = Number(train.barvlDt);
+
+    // 시간이 정상적으로 들어오면 분 단위로 표시
+    if (!isNaN(seconds) && seconds > 0) {
+      return formatSecondsToMinutes(seconds);
+    }
+
+    // 시간이 0이거나 없으면 위치 안내 문구 사용
+    const message = String(train.arvlMsg2 ?? "").trim();
+
+    if (message) {
+      return message
+        .replace(/\[(\d+)\]/g, "$1")
+        .replace(/[()]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    return formatSecondsToMinutes(seconds);
+  };
 
 
   // ---------- 편의시설 ----------
@@ -338,9 +361,7 @@ function Detail() {
                     {trains.map((train, idx) => (
                       <div key={idx} className={`arrival-info-${idx + 1}`}>
                         <span>{train.bstatnNm}</span>
-                        <span>
-                          {train.arvlMsg2 || formatSecondsToMinutes(train.barvlDt)}
-                        </span>
+                        <span>{formatArrivalMessage(train)}</span>
                       </div>
                     ))}
                   </div>
