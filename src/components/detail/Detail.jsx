@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo, useState } from 'react';
 import { arrivalInfoIndex, convenienceInfoIndex, stationInfoIndex } from '../../store/thunks/detailThunk';
 import LINE_COLORS from "../../configs/lineColors.js";
+import { normalizeName } from "../linesdetail/linesDetailUtil.js";
 
 function Detail() {
   const dispatch = useDispatch();
@@ -163,8 +164,17 @@ function Detail() {
     dispatch(convenienceInfoIndex());
   }, []);
 
-  const currentConvenienceInfo = Array.isArray(convenienceInfo) ? convenienceInfo.find(info =>
-    info.STATION_NAME === station && (matchesLineField(info.LINE) || matchesLineField(info.LINE?.toString?.()))) || convenienceInfo.find(info => info.STATION_NAME === station) : null;
+  const currentConvenienceInfo = Array.isArray(convenienceInfo)
+    ? convenienceInfo.find(
+      (info) =>
+        normalizeName(info.STATION_NAME) === normalizeName(station) &&
+        matchesLineField(String(info.LINE ?? "")),
+    ) ||
+    convenienceInfo.find(
+      (info) =>
+        normalizeName(info.STATION_NAME) === normalizeName(station),
+    )
+    : null;
 
   const getConvenienceInfo = (key) => {
     const value = currentConvenienceInfo?.[key];
