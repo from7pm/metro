@@ -328,7 +328,9 @@ function Detail() {
                     {trains.map((train, idx) => (
                       <div key={idx} className={`arrival-info-${idx + 1}`}>
                         <span>{train.bstatnNm}</span>
-                        <span>{formatSecondsToMinutes(train.barvlDt)}</span>
+                        <span>
+                          {train.arvlMsg2 || formatSecondsToMinutes(train.barvlDt)}
+                        </span>
                       </div>
                     ))}
                   </div>
