@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Main.css';
+import { Analytics } from "@vercel/analytics/react";
 
 function Main() {
   const [fadeOut, setFadeOut] = useState(false);
@@ -17,6 +18,7 @@ function Main() {
         <img className='main-header' src="/base/main-header.svg" alt="메인페이지 헤더" />
         <img className='main-train-icon' src="/base/main-train-icon.svg" alt="메인페이지 지하철 아이콘" />
       </div>
+      <Analytics />
     </>
   )
 }
